@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] bool world;
     [SerializeField] float _speed = 1f;
     [SerializeField] Rigidbody _rb;
 
+    GameManager gameManager;
+
+    private void Awake()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
+
     private void FixedUpdate()
     {
-        if (world == true)
+        Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed;
+        direction.y = _rb.velocity.y;
+        _rb.velocity = direction;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed;
-            direction.y = _rb.velocity.y;
-            _rb.velocity = direction;
-        }
-        else
-        {
-            Vector3 direction = transform.TransformDirection(new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed);
-            direction.y = _rb.velocity.y;
-            _rb.velocity = direction;
-        }
+            gameManager.ChangeState(GameManager.GameState.Paused);
+        }                           
     }
 }
