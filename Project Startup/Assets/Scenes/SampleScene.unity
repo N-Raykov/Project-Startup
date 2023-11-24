@@ -200,8 +200,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMat: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  shineMat: {fileID: 2100000, guid: 82b676ab4ed5cda449c3c93b4aad58f3, type: 2}
+  renderers:
+  - {fileID: 205558695}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!65 &205558694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1025,8 +1026,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMat: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  shineMat: {fileID: 2100000, guid: 82b676ab4ed5cda449c3c93b4aad58f3, type: 2}
+  renderers:
+  - {fileID: 658574704}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!65 &658574703
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1929,8 +1931,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseMat: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  shineMat: {fileID: 2100000, guid: 82b676ab4ed5cda449c3c93b4aad58f3, type: 2}
+  renderers:
+  - {fileID: 1710173764}
+  color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &1775727533
 GameObject:
   m_ObjectHideFlags: 0

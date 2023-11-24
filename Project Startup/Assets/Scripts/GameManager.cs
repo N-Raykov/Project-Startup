@@ -46,10 +46,12 @@ public class GameManager : MonoBehaviour
         if (curerentState == GameState.Paused)
         {
             gameIsPaused = true;
+            Time.timeScale = 0f;
         }
         else
         {
             gameIsPaused = false;
+            Time.timeScale = 1f;
         }
     }
 
