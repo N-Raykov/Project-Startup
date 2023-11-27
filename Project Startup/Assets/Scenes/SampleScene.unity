@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: 205558693}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -197,12 +197,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 205558692}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc19c29fbf8f9449aa011c8e67eef09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 205558695}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
+  inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  player: {fileID: 1657980747}
+  interactDistance: 6
+  minigameSceneID: 3
 --- !u!65 &205558694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -335,7 +339,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 11.18
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -358,14 +362,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 1.76, y: 8.15, z: -2.97}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.38268346, y: -0, z: -0, w: 0.9238796}
+  m_LocalPosition: {x: 3.13, y: 8.15, z: 1.52}
+  m_LocalScale: {x: 1, y: 0.9999999, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1013,7 @@ GameObject:
   - component: {fileID: 658574702}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1023,12 +1027,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 658574701}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc19c29fbf8f9449aa011c8e67eef09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 658574704}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
+  inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  player: {fileID: 1657980747}
+  interactDistance: 6
+  minigameSceneID: 4
 --- !u!65 &658574703
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1836,7 +1844,7 @@ GameObject:
   - component: {fileID: 1710173767}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1928,12 +1936,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1710173762}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3de8ca064de1f0e44a6862cbbbe195dd, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fc19c29fbf8f9449aa011c8e67eef09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 1710173764}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
+  inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  player: {fileID: 1657980747}
+  interactDistance: 6
+  minigameSceneID: 2
 --- !u!1 &1775727533
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,38 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Interactable : MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
-    //we assign all the renderers here through the inspector
-    [SerializeField]
-    private List<Renderer> renderers;
-    [SerializeField]
-    private Color color = Color.white;
+    [SerializeField] private List<Renderer> renderers;
 
-    //helper list to cache all the materials ofd this object
+    [SerializeField] private Color outOfRangeInteractColor = Color.white;
+
+    [SerializeField] private Color inRangeInteractableColor = Color.yellow;
+
+    [SerializeField] private GameObject player;
+
+    [SerializeField] float interactDistance = 1f;
+
+    protected GameManager gameManager;
+
+    [System.NonSerialized] public bool isClosest = false;
+
+    private bool isSelected = false;
+
     private List<Material> materials;
 
-    //Gets all the materials from each renderer
+    Ray ray;
+    RaycastHit hit;
+
     private void Awake()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+
         materials = new List<Material>();
+
         foreach (var renderer in renderers)
         {
-            //A single child-object might have mutliple materials on it
-            //that is why we need to all materials with "s"
             materials.AddRange(new List<Material>(renderer.materials));
         }
     }
 
-    public void ToggleHighlight(bool val)
+    public void ToggleHighlight(bool isOn, Color color = new Color())
     {
-        if (val)
+        if (isOn)
         {
             foreach (var material in materials)
             {
-                //We need to enable the EMISSION
                 material.EnableKeyword("_EMISSION");
-                //before we can set the color
+
                 material.SetColor("_EmissionColor", color);
             }
         }
@@ -41,21 +52,62 @@ public class Interactable : MonoBehaviour
         {
             foreach (var material in materials)
             {
-                //we can just disable the EMISSION
-                //if we don't use emission color anywhere else
                 material.DisableKeyword("_EMISSION");
             }
         }
     }
 
-    private void OnMouseEnter()
+    private void Update()
     {
-        ToggleHighlight(true);
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == this.gameObject || isClosest == true)
+        {
+            isSelected = true;
+        }
+        else
+        {
+            isSelected = false;
+        }
+
+        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit) && hit.collider.gameObject == this.gameObject && CanInteract() == true)
+        {
+            Interact();
+        }
+
+        HightLight();
     }
 
-    private void OnMouseExit()
+    void HightLight()
     {
-        ToggleHighlight(false);
+        if (CanInteract() == true && isSelected == true)
+        {
+            ToggleHighlight(true, inRangeInteractableColor);
+        }
+        else if (isSelected == true)
+        {
+            ToggleHighlight(true, outOfRangeInteractColor);
+        }
+        else
+        {
+            ToggleHighlight(false);
+        }
     }
 
+    public bool CanInteract()
+    {
+        if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= interactDistance)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public virtual void Interact()
+    {
+
+    }
 }

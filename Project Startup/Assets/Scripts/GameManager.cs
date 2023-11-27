@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,6 +40,11 @@ public class GameManager : MonoBehaviour
                 curerentState = newState;
                 break;
         }
+    }
+
+    public void ChangeScene(int sceneID)
+    {
+        SceneManager.LoadScene(sceneID);
     }
 
     private void Update()

@@ -2,20 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class ButtonClick : MonoBehaviour
 {
+    GameManager gameManager;
+
+    private void OnEnable()
+    {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+    }
+
     public void MoveScene(int sceneID)
     {
-        SceneManager.LoadScene(sceneID); 
+        gameManager.ChangeScene(sceneID); 
     }
 
     public void ChangeGameState(int stateID)
     {
         GameManager.GameState gameState = (GameManager.GameState)stateID;
 
-        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ChangeState(gameState);
+        gameManager.ChangeState(gameState);
     }
 
     public void EnableMenu(GameObject menu)
