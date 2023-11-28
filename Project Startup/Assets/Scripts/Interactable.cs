@@ -6,29 +6,17 @@ public abstract class Interactable : MonoBehaviour
 {
     [SerializeField] private List<Renderer> renderers;
 
-    [SerializeField] private Color outOfRangeInteractColor = Color.white;
-
-    [SerializeField] private Color inRangeInteractableColor = Color.yellow;
-
-    [SerializeField] private GameObject player;
-
-    [SerializeField] float interactDistance = 1f;
-
-    protected GameManager gameManager;
-
-    [System.NonSerialized] public bool isClosest = false;
-
-    private bool isSelected = false;
+    protected bool isSelected = false;
 
     private List<Material> materials;
 
-    Ray ray;
-    RaycastHit hit;
+    private Color baseHighlightColor = Color.yellow;
 
-    private void Awake()
+    protected Ray ray;
+    protected RaycastHit hit;
+
+    protected virtual void Awake()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-
         materials = new List<Material>();
 
         foreach (var renderer in renderers)
@@ -37,7 +25,7 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
-    public void ToggleHighlight(bool isOn, Color color = new Color())
+    protected void ToggleHighlight(bool isOn, Color color = new Color())
     {
         if (isOn)
         {
@@ -57,11 +45,11 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == this.gameObject || isClosest == true)
+        if (Physics.Raycast(ray, out hit) && hit.collider.gameObject == this.gameObject)
         {
             isSelected = true;
         }
@@ -70,39 +58,18 @@ public abstract class Interactable : MonoBehaviour
             isSelected = false;
         }
 
-        if (Input.GetMouseButtonDown(0) && Physics.Raycast(ray, out hit) && hit.collider.gameObject == this.gameObject && CanInteract() == true)
-        {
-            Interact();
-        }
-
         HightLight();
     }
 
-    void HightLight()
+    protected virtual void HightLight()
     {
-        if (CanInteract() == true && isSelected == true)
+        if (isSelected == true)
         {
-            ToggleHighlight(true, inRangeInteractableColor);
-        }
-        else if (isSelected == true)
-        {
-            ToggleHighlight(true, outOfRangeInteractColor);
+            ToggleHighlight(true, baseHighlightColor);
         }
         else
         {
             ToggleHighlight(false);
-        }
-    }
-
-    public bool CanInteract()
-    {
-        if (Vector3.Distance(this.gameObject.transform.position, player.transform.position) <= interactDistance)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
         }
     }
 

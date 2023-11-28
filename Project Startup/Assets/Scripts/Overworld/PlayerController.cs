@@ -42,23 +42,23 @@ public class PlayerController : MonoBehaviour
 
         foreach (GameObject interactable in interactables)
         {
-            if (interactable.GetComponent<Interactable>().CanInteract() == true)
+            if (interactable.GetComponent<OverworldInteractable>().CanInteract() == true)
             {
                 interactablesInRange.Add(interactable);
             }
-                interactable.GetComponent<Interactable>().isClosest = false;
+                interactable.GetComponent<OverworldInteractable>().isClosest = false;
         }
 
         GameObject closestInteractable = GetClosestInteractable(interactablesInRange);
 
         if(closestInteractable != null)
         {
-            closestInteractable.GetComponent<Interactable>().isClosest = true;
+            closestInteractable.GetComponent<OverworldInteractable>().isClosest = true;
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            closestInteractable.GetComponent<Interactable>().Interact();
+            closestInteractable.GetComponent<OverworldInteractable>().Interact();
         }
     }
 
