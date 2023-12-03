@@ -10,9 +10,9 @@ public class OverworldInteractable : Interactable
 
     [SerializeField] float interactDistance = 1f;
 
-    [SerializeField] private Color outOfRangeInteractColor = Color.white;
+    [SerializeField] protected Color outOfRangeInteractColor = Color.white;
 
-    [SerializeField] private Color inRangeInteractableColor = Color.yellow;
+    [SerializeField] protected Color inRangeInteractableColor = Color.yellow;
 
     [System.NonSerialized] public bool isClosest = false;
 

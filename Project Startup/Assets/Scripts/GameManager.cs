@@ -1,75 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public bool gameIsPaused;
+    private static GameManager instance;
 
-    public enum GameState
-    {
-        MainMenu,
-        Paused,
-        Gaming,
-        MiniGaming,
-        Building
-    }
+    public string miniGameInProgress { get; set; }
 
-    GameState curerentState { get; set; }
-    GameState lastState { get; set; }
-
-    public void ChangeState(GameState newState)
-    {
-        switch (curerentState)
-        {
-            case GameState.Paused:
-                if(newState == GameState.Paused)
-                {
-                    curerentState = lastState;
-                    lastState = GameState.Paused;
-                }
-                else
-                {
-                    lastState = curerentState;
-                    curerentState = newState;
-                }
-                break;
-            default:
-                lastState = curerentState;
-                curerentState = newState;
-                break;
-        }
-    }
+    GameObject[] minigames;
+    Dictionary<string, bool> miniGameStatus;
 
     public void ChangeScene(int sceneID)
     {
         SceneManager.LoadScene(sceneID);
     }
 
-    private void Update()
+    public void CompleteCurrentMinigame()
     {
-        if (curerentState == GameState.Paused)
+        // Check if miniGameInProgress is not null and if the key exists in the dictionary
+        if (!string.IsNullOrEmpty(miniGameInProgress) && miniGameStatus.ContainsKey(miniGameInProgress))
         {
-            gameIsPaused = true;
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            gameIsPaused = false;
-            Time.timeScale = 1f;
+            miniGameStatus[miniGameInProgress] = true;
+
+            miniGameInProgress = null;
         }
     }
 
-    private void Awake()
+    void OnEnable()
     {
-        GameObject[] objs = GameObject.FindGameObjectsWithTag("GameManager");
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
-        if (objs.Length > 1)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == 1)
         {
-            Destroy(this.gameObject);
+            // Fill the minigames array with gameobjects with tag "Interactable" and component "MiniGame"
+            minigames = GameObject.FindGameObjectsWithTag("Interactable");
+            minigames = minigames.Where(go => go.GetComponent<MiniGame>() != null).ToArray();
+
+            // Iterate through minigames and set the public bool based on the dictionary
+            foreach (GameObject minigame in minigames)
+            {
+                MiniGame miniGameScript = minigame.GetComponent<MiniGame>();
+                if (miniGameScript != null)
+                {
+                    // Check if the public string is not in the dictionary and add it
+                    if (!miniGameStatus.ContainsKey(miniGameScript.miniGameName))
+                    {
+                        miniGameStatus.Add(miniGameScript.miniGameName, false);
+                    }
+
+                    // Set the public bool based on the dictionary
+                    miniGameScript.completed = miniGameStatus[miniGameScript.miniGameName];
+                }
+            }
+        }
+    }
+
+    void Awake()
+    {
+        // Ensure there is only one instance of UIManager
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this.gameObject);
+        miniGameStatus = new Dictionary<string, bool>();
     }
 }

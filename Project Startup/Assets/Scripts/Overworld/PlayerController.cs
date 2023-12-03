@@ -7,14 +7,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float _speed = 1f;
     [SerializeField] Rigidbody _rb;
 
-    GameManager gameManager;
-
     GameObject[] interactables;
     List<GameObject> interactablesInRange;
 
     private void Awake()
     {
-        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        interactables = GameObject.FindGameObjectsWithTag("Interactable");
     }
 
     private void FixedUpdate()
@@ -31,13 +29,6 @@ public class PlayerController : MonoBehaviour
 
     void Controls()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            gameManager.ChangeState(GameManager.GameState.Paused);
-        }
-
-        interactables = GameObject.FindGameObjectsWithTag("Interactable");
-
         interactablesInRange = new List<GameObject>();
 
         foreach (GameObject interactable in interactables)

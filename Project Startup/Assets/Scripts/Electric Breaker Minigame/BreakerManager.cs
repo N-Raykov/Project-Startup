@@ -7,9 +7,11 @@ public class BreakerManager : MonoBehaviour
     [SerializeField] GameObject normalBreakerPrefab;
     [SerializeField] GameObject brokenBreakerPrefab;
     [SerializeField] GameObject movingBreakerPrefab;
+    GameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         // Instantiate normal breakers, choosing one as the broken breaker
         InstantiateNormalAndBrokenBreakers();
     }
@@ -49,6 +51,7 @@ public class BreakerManager : MonoBehaviour
     public void HandleMovingBreakerPlaced(Vector3 position)
     {
         Instantiate(normalBreakerPrefab, position, Quaternion.identity);
+        gameManager.CompleteCurrentMinigame();
     }
 }
 

@@ -6,22 +6,17 @@ using UnityEngine.UI;
 public class ButtonClick : MonoBehaviour
 {
     GameManager gameManager;
+    UIManager UIManager;
 
     private void OnEnable()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        UIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
     }
 
     public void MoveScene(int sceneID)
     {
         gameManager.ChangeScene(sceneID); 
-    }
-
-    public void ChangeGameState(int stateID)
-    {
-        GameManager.GameState gameState = (GameManager.GameState)stateID;
-
-        gameManager.ChangeState(gameState);
     }
 
     public void EnableMenu(GameObject menu)
@@ -32,5 +27,10 @@ public class ButtonClick : MonoBehaviour
     public void DisableMenu(GameObject menu)
     {
         menu.SetActive(false);
+    }
+
+    public void TogglePauseMenu()
+    {
+        UIManager.TogglePauseMenu();
     }
 }
