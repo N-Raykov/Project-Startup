@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2662035021959821699}
   - component: {fileID: 2662035021959821696}
   m_Layer: 5
-  m_Name: Electric Breaker back
+  m_Name: Mini Game Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

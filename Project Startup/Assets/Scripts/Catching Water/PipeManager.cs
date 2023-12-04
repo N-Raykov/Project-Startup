@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PipeManager : MonoBehaviour
 {
-    public GameObject nutPrefab;
-    public GameObject waterDropletPrefab;
-    public float minSpawnInterval = 2f;
-    public float maxSpawnInterval = 5f;
+    [SerializeField] GameObject nutPrefab;
+    [SerializeField] GameObject waterDropletPrefab;
+    [SerializeField] float minSpawnInterval = 2f;
+    [SerializeField] float maxSpawnInterval = 5f;
+    [SerializeField] float minSpawnIntervalReduction = 0.5f;
+    [SerializeField] float maxSpawnIntervalReduction = 1f;
 
     private List<Vector3> originalNutPositions;
     private Transform[] nutPositions;
@@ -15,8 +17,12 @@ public class PipeManager : MonoBehaviour
     private int nutsTightenedCount = 0;
     private int maxNuts;
 
+    private GameManager gameManager;
+
     void Start()
     {
+        gameManager = FindAnyObjectByType<GameManager>();
+
         Transform[] childTransforms = GetComponentsInChildren<Transform>();
         nutPositions = new Transform[childTransforms.Length - 1];
         nutsTightened = new bool[childTransforms.Length - 1];
@@ -38,7 +44,7 @@ public class PipeManager : MonoBehaviour
             CreateNuts();
         }
 
-        StartSpawning();
+        StartCoroutine(SpawnWaterDroplets());
     }
 
     void CreateNuts()
@@ -61,31 +67,24 @@ public class PipeManager : MonoBehaviour
         }
     }
 
-
-    void StartSpawning()
+    IEnumerator SpawnWaterDroplets()
     {
-        InvokeRepeating("SpawnWaterDroplet", maxSpawnInterval, GetRandomSpawnInterval());
-    }
-
-    float GetRandomSpawnInterval()
-    {
-        return Random.Range(minSpawnInterval, maxSpawnInterval);
-    }
-
-    void SpawnWaterDroplet()
-    {
-        if (nutsTightenedCount < maxNuts)
+        while (nutsTightenedCount < maxNuts)
         {
+            yield return new WaitForSeconds(GetRandomSpawnInterval());
+
             int randomIndex = GetRandomNutIndex();
 
             if (!nutsTightened[randomIndex])
             {
                 Instantiate(waterDropletPrefab, originalNutPositions[randomIndex], Quaternion.identity);
-
-                minSpawnInterval -= 0.1f;
-                maxSpawnInterval -= 0.2f;
             }
         }
+    }
+
+    float GetRandomSpawnInterval()
+    {
+        return Random.Range(minSpawnInterval, maxSpawnInterval);
     }
 
     int GetRandomNutIndex()
@@ -104,23 +103,18 @@ public class PipeManager : MonoBehaviour
         nutsTightened[nutIndex] = true;
         nutsTightenedCount++;
 
+        minSpawnInterval -= minSpawnIntervalReduction;
+        maxSpawnInterval -= maxSpawnIntervalReduction;
+
         if (nutsTightenedCount >= maxNuts)
         {
-            EndMinigame(true); 
+            EndMinigame(); 
         }
     }
 
-    public void EndMinigame(bool playerWon)
+    public void EndMinigame()
     {
-        CancelInvoke("SpawnWaterDroplet");
-
-        if (playerWon)
-        {
-            Debug.Log("Minigame Completed! Player Won!");
-        }
-        else
-        {
-            Debug.Log("Minigame Failed! Player Lost!");
-        }
+        StopCoroutine(SpawnWaterDroplets());
+        gameManager.CompleteCurrentMinigame();
     }
 }
