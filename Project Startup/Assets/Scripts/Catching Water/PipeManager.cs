@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PipeManager : MonoBehaviour
@@ -75,9 +76,13 @@ public class PipeManager : MonoBehaviour
 
             int randomIndex = GetRandomNutIndex();
 
-            if (!nutsTightened[randomIndex])
+            if (!nutsTightened[randomIndex] && randomIndex != -1)
             {
                 Instantiate(waterDropletPrefab, originalNutPositions[randomIndex], Quaternion.identity);
+            }
+            else
+            {
+                yield return null;
             }
         }
     }
@@ -89,6 +94,13 @@ public class PipeManager : MonoBehaviour
 
     int GetRandomNutIndex()
     {
+        // Ensure that there's at least one nut that is not tightened.
+        if (nutsTightened.All(value => value))
+        {
+            // All nuts are tightened, return a default value or handle it as needed.
+            return -1; // For example, return -1 to indicate an error or no available index.
+        }
+
         int randomIndex;
         do
         {
