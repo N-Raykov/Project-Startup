@@ -112,6 +112,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 8282707956614218925}
-  rotationSpeed: 5
-  tighteningSspeed: 0.5
+  rotationSpeed: 25
+  tighteningSspeed: 2
   tighteningGoal: 5

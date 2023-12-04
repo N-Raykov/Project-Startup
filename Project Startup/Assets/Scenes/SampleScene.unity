@@ -257,7 +257,7 @@ PrefabInstance:
     - target: {fileID: 1332024729334849635, guid: 404e5a785475bcc48b10b5f3448c87a5,
         type: 3}
       propertyPath: uiPrefabArray.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1332024729334849635, guid: 404e5a785475bcc48b10b5f3448c87a5,
         type: 3}
@@ -277,6 +277,12 @@ PrefabInstance:
     - target: {fileID: 1332024729334849635, guid: 404e5a785475bcc48b10b5f3448c87a5,
         type: 3}
       propertyPath: uiPrefabArray.Array.data[2]
+      value: 
+      objectReference: {fileID: 2662035021959821697, guid: a45816d7d3c938d48abbcfa4ac7555b7,
+        type: 3}
+    - target: {fileID: 1332024729334849635, guid: 404e5a785475bcc48b10b5f3448c87a5,
+        type: 3}
+      propertyPath: uiPrefabArray.Array.data[3]
       value: 
       objectReference: {fileID: 2662035021959821697, guid: a45816d7d3c938d48abbcfa4ac7555b7,
         type: 3}
@@ -598,7 +604,7 @@ MonoBehaviour:
   outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
   inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   minigameSceneID: 3
-  miniGameName: 
+  miniGameName: Catching Water
   completedColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!65 &658574703
 BoxCollider:
