@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Electric Breaker.unity
     guid: bde9ebe3f1063a24d9787229547bde9a
   - enabled: 1
-    path: Assets/Scenes/MiniGame2.unity
+    path: Assets/Scenes/Catching Water.unity
     guid: 808f2fc43cef90643995e683f1121341
   m_configObjects: {}

@@ -19,9 +19,16 @@ public abstract class Interactable : MonoBehaviour
     {
         materials = new List<Material>();
 
-        foreach (var renderer in renderers)
+        if (renderers.Count != 0)
         {
-            materials.AddRange(new List<Material>(renderer.materials));
+            foreach (var renderer in renderers)
+            {
+                materials.AddRange(new List<Material>(renderer.materials));
+            }
+        }
+        else
+        {
+            Debug.Log("The interactable: " + this.gameObject + " has no assigned renderers for highlighting");
         }
     }
 
