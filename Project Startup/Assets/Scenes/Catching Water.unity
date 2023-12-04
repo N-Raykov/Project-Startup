@@ -454,7 +454,7 @@ MonoBehaviour:
   renderers:
   - {fileID: 1161750965}
   rotationSpeed: 5
-  tighteningSspeed: 0.5
+  tighteningSspeed: 2
   tighteningGoal: 5
 --- !u!1 &1320103702
 GameObject:
@@ -569,7 +569,7 @@ MonoBehaviour:
   renderers:
   - {fileID: 1320103705}
   rotationSpeed: 5
-  tighteningSspeed: 0.5
+  tighteningSspeed: 2
   tighteningGoal: 5
 --- !u!1 &1420694162
 GameObject:
@@ -863,7 +863,7 @@ MonoBehaviour:
   renderers:
   - {fileID: 1682128802}
   rotationSpeed: 5
-  tighteningSspeed: 0.5
+  tighteningSspeed: 2
   tighteningGoal: 5
 --- !u!1 &1796899424
 GameObject:
@@ -1111,6 +1111,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1796899428}
     m_Modifications:
+    - target: {fileID: 8282707956614218926, guid: e91605ec28a0f0b4cb4dc842a5c7dba4,
+        type: 3}
+      propertyPath: tighteningSspeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8282707956614218927, guid: e91605ec28a0f0b4cb4dc842a5c7dba4,
         type: 3}
       propertyPath: m_RootOrder

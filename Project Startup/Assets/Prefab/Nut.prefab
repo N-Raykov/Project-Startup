@@ -113,5 +113,5 @@ MonoBehaviour:
   renderers:
   - {fileID: 8282707956614218925}
   rotationSpeed: 5
-  tighteningSspeed: 0.5
+  tighteningSspeed: 2
   tighteningGoal: 5
