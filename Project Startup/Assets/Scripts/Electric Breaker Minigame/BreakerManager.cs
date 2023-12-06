@@ -9,6 +9,9 @@ public class BreakerManager : MonoBehaviour
     [SerializeField] GameObject movingBreakerPrefab;
     GameManager gameManager;
 
+    [SerializeField] int minMoneyOnWin = 520;
+    [SerializeField] int maxMoneyOnWin = 650;
+
     void Start()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -51,6 +54,7 @@ public class BreakerManager : MonoBehaviour
     public void HandleMovingBreakerPlaced(Vector3 position)
     {
         Instantiate(normalBreakerPrefab, position, Quaternion.identity);
+        gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();
     }
 }

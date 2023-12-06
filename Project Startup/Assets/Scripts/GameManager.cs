@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     GameObject[] minigames;
     Dictionary<string, bool> miniGameStatus;
 
+    public int money = 0;
+
     public void ChangeScene(int sceneID)
     {
         SceneManager.LoadScene(sceneID);

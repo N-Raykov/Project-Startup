@@ -12,6 +12,9 @@ public class PipeManager : MonoBehaviour
     [SerializeField] float minSpawnIntervalReduction = 0.5f;
     [SerializeField] float maxSpawnIntervalReduction = 1f;
 
+    [SerializeField] int minMoneyOnWin = 520;
+    [SerializeField] int maxMoneyOnWin = 650;
+
     private List<Vector3> originalNutPositions;
     private Transform[] nutPositions;
     private bool[] nutsTightened;
@@ -76,7 +79,7 @@ public class PipeManager : MonoBehaviour
 
             int randomIndex = GetRandomNutIndex();
 
-            if (!nutsTightened[randomIndex] && randomIndex != -1)
+            if (randomIndex != -1)
             {
                 Instantiate(waterDropletPrefab, originalNutPositions[randomIndex], Quaternion.identity);
             }
@@ -97,8 +100,7 @@ public class PipeManager : MonoBehaviour
         // Ensure that there's at least one nut that is not tightened.
         if (nutsTightened.All(value => value))
         {
-            // All nuts are tightened, return a default value or handle it as needed.
-            return -1; // For example, return -1 to indicate an error or no available index.
+            return -1; 
         }
 
         int randomIndex;
@@ -126,7 +128,7 @@ public class PipeManager : MonoBehaviour
 
     public void EndMinigame()
     {
-        StopCoroutine(SpawnWaterDroplets());
+        gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();
     }
 }
