@@ -8,7 +8,7 @@ public class WaterDroplet : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.down * fallSpeed * Time.deltaTime);
+        transform.Translate(-transform.up * fallSpeed * Time.deltaTime);
 
         if (transform.position.y <= -10f)
         {

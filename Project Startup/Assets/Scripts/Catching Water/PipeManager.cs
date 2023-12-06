@@ -27,16 +27,24 @@ public class PipeManager : MonoBehaviour
     {
         gameManager = FindAnyObjectByType<GameManager>();
 
-        Transform[] childTransforms = GetComponentsInChildren<Transform>();
-        nutPositions = new Transform[childTransforms.Length - 1];
-        nutsTightened = new bool[childTransforms.Length - 1];
+        GameObject[] nuts = GameObject.FindGameObjectsWithTag("Nut");
+        List<Transform> nutTransforms = new List<Transform>();
+
+        foreach (GameObject nut in nuts)
+        {
+            nutTransforms.Add(nut.transform);
+        }
+
+        nutPositions = new Transform[nutTransforms.Count];
+        nutsTightened = new bool[nutTransforms.Count];
 
         int nutCount = 0;
-        for (int i = 1; i < childTransforms.Length; i++)
+        for (int i = 0; i < nutTransforms.Count; i++)
         {
-            if (childTransforms[i].CompareTag("Nut"))
+            if (nutTransforms[i].CompareTag("Nut"))
             {
-                nutPositions[nutCount] = childTransforms[i];
+                nutPositions[nutCount] = nutTransforms[i];
+                Debug.Log(nutPositions[nutCount].name);
                 nutCount++;
             }
         }

@@ -33,7 +33,7 @@ public class Nut : Interactable
 
     void RotateNut()
     {
-        transform.Rotate(Vector3.right * rotationSpeed * Time.deltaTime, Space.World);
+        transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime, Space.World);
 
         tighteningProgress = tighteningProgress + (tighteningSspeed * Time.deltaTime);
 

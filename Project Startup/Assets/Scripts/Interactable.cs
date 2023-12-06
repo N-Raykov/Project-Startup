@@ -28,7 +28,7 @@ public abstract class Interactable : MonoBehaviour
         }
         else
         {
-            Debug.Log("The interactable: " + this.gameObject + " has no assigned renderers for highlighting");
+            Debug.LogWarning("The interactable: " + this.gameObject + " has no assigned renderers for highlighting");
         }
     }
 

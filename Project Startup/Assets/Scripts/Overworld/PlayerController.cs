@@ -49,7 +49,14 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            closestInteractable.GetComponent<OverworldInteractable>().Interact();
+            if(closestInteractable != null)
+            {
+                closestInteractable.GetComponent<OverworldInteractable>().Interact();
+            }
+            else
+            {
+                Debug.Log("There are no interactables in range. Make sure all interactables are tagged as Interactable and check their interact distance.");
+            }
         }
     }
 

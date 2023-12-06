@@ -9,11 +9,16 @@ public class MoneyUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
 
     private int money;
+    private GameManager gameManager;
 
     private void Start()
     {
-        money = FindObjectOfType<GameManager>().money;
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
+    private void Update()
+    {
+        money = gameManager.money;
         moneyText.text = "Money: " + money.ToString();
     }
 }
