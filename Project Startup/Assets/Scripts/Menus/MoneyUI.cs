@@ -19,6 +19,6 @@ public class MoneyUI : MonoBehaviour
     private void Update()
     {
         money = gameManager.money;
-        moneyText.text = "Money: " + money.ToString();
+        moneyText.text = money.ToString();
     }
 }

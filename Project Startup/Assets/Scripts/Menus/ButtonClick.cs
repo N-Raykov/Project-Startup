@@ -35,5 +35,8 @@ public class ButtonClick : MonoBehaviour
         UIManager.TogglePauseMenu();
     }
 
-   
+   public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
