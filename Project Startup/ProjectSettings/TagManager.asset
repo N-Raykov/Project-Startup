@@ -9,6 +9,7 @@ TagManager:
   - Breaker
   - EmptySpot
   - Nut
+  - Furniture
   layers:
   - Default
   - TransparentFX

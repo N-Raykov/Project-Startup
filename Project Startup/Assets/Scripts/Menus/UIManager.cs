@@ -5,16 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] GameObject[] uiPrefabArray;
+    //[SerializeField] GameObject[] uiPrefabArray;
     [SerializeField] GameObject pauseMenuPrefab;
 
-    private GameObject[] uiInstances;
+    //private GameObject[] uiInstances;
     private GameObject pauseMenu;
     private bool isPaused = false;
 
     void Awake()
     {
-        uiInstances = new GameObject[uiPrefabArray.Length];
+        //uiInstances = new GameObject[uiPrefabArray.Length];
     }
 
     void Start()
@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
 
     void ActivateSceneUI(int sceneID)
     {
+        /*
         if (uiInstances != null && sceneID >= 0 && sceneID < uiInstances.Length)
         {
             if (uiPrefabArray[sceneID] != null)
@@ -55,7 +56,7 @@ public class UIManager : MonoBehaviour
         {
             Debug.LogWarning("UIManager: Scene ID out of range");
         }
-
+        */
         if (pauseMenuPrefab != null && pauseMenu == null)
         {
             pauseMenu = Instantiate(pauseMenuPrefab, transform.parent);

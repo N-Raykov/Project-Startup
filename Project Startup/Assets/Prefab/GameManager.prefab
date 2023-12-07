@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87fe3bf12ebd01478bf1344291c1dd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniGameInProgress: {fileID: 0}
+  money: 0
 --- !u!114 &1332024729334849635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -58,6 +58,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f54fb212d75e7cd4181596bd70f0c1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiPrefabArray: []
+  uiPrefabArray:
+  - {fileID: 0}
+  - {fileID: 2662035021959821697, guid: 806118d88694eba44a8be754c906d604, type: 3}
+  - {fileID: 2662035021959821697, guid: a45816d7d3c938d48abbcfa4ac7555b7, type: 3}
+  - {fileID: 2662035021959821697, guid: a45816d7d3c938d48abbcfa4ac7555b7, type: 3}
   pauseMenuPrefab: {fileID: 2662035021959821697, guid: ba3f34ff4b2653f4b925e8012de2f164,
     type: 3}

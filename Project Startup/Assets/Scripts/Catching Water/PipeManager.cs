@@ -1,16 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class PipeManager : MonoBehaviour
 {
+    [SerializeField] ParticleSystem completionParticles;
+    [SerializeField] TextMeshProUGUI completed;
+
     [SerializeField] GameObject nutPrefab;
     [SerializeField] GameObject waterDropletPrefab;
     [SerializeField] float minSpawnInterval = 2f;
     [SerializeField] float maxSpawnInterval = 5f;
     [SerializeField] float minSpawnIntervalReduction = 0.5f;
     [SerializeField] float maxSpawnIntervalReduction = 1f;
+
+    [SerializeField] int minMoneyOnWin = 520;
+    [SerializeField] int maxMoneyOnWin = 650;
 
     private List<Vector3> originalNutPositions;
     private Transform[] nutPositions;
@@ -24,16 +31,24 @@ public class PipeManager : MonoBehaviour
     {
         gameManager = FindAnyObjectByType<GameManager>();
 
-        Transform[] childTransforms = GetComponentsInChildren<Transform>();
-        nutPositions = new Transform[childTransforms.Length - 1];
-        nutsTightened = new bool[childTransforms.Length - 1];
+        GameObject[] nuts = GameObject.FindGameObjectsWithTag("Nut");
+        List<Transform> nutTransforms = new List<Transform>();
+
+        foreach (GameObject nut in nuts)
+        {
+            nutTransforms.Add(nut.transform);
+        }
+
+        nutPositions = new Transform[nutTransforms.Count];
+        nutsTightened = new bool[nutTransforms.Count];
 
         int nutCount = 0;
-        for (int i = 1; i < childTransforms.Length; i++)
+        for (int i = 0; i < nutTransforms.Count; i++)
         {
-            if (childTransforms[i].CompareTag("Nut"))
+            if (nutTransforms[i].CompareTag("Nut"))
             {
-                nutPositions[nutCount] = childTransforms[i];
+                nutPositions[nutCount] = nutTransforms[i];
+                Debug.Log(nutPositions[nutCount].name);
                 nutCount++;
             }
         }
@@ -76,7 +91,7 @@ public class PipeManager : MonoBehaviour
 
             int randomIndex = GetRandomNutIndex();
 
-            if (!nutsTightened[randomIndex] && randomIndex != -1)
+            if (randomIndex != -1)
             {
                 Instantiate(waterDropletPrefab, originalNutPositions[randomIndex], Quaternion.identity);
             }
@@ -97,8 +112,7 @@ public class PipeManager : MonoBehaviour
         // Ensure that there's at least one nut that is not tightened.
         if (nutsTightened.All(value => value))
         {
-            // All nuts are tightened, return a default value or handle it as needed.
-            return -1; // For example, return -1 to indicate an error or no available index.
+            return -1; 
         }
 
         int randomIndex;
@@ -126,7 +140,9 @@ public class PipeManager : MonoBehaviour
 
     public void EndMinigame()
     {
-        StopCoroutine(SpawnWaterDroplets());
+        completionParticles.Play();
+        completed.enabled = false;
+        gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();
     }
 }

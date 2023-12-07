@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
     GameObject[] minigames;
     Dictionary<string, bool> miniGameStatus;
 
+    GameObject[] furniture;
+    Dictionary<string, bool> furnitureStatus;
+
+    public int money = 0;
+
     public void ChangeScene(int sceneID)
     {
         SceneManager.LoadScene(sceneID);
@@ -29,6 +34,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlaceFurniture(string furnitureName)
+    {
+        if (furnitureStatus.ContainsKey(furnitureName))
+        {
+            furnitureStatus[furnitureName] = true;
+        }
+    }
+
     void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -42,6 +55,9 @@ public class GameManager : MonoBehaviour
             minigames = GameObject.FindGameObjectsWithTag("Interactable");
             minigames = minigames.Where(go => go.GetComponent<MiniGame>() != null).ToArray();
 
+            furniture = GameObject.FindGameObjectsWithTag("Interactable");
+            furniture = furniture.Where(go => go.GetComponentInChildren<FurniturePlacement>() != null).ToArray();
+
             // Iterate through minigames and set the public bool based on the dictionary
             foreach (GameObject minigame in minigames)
             {
@@ -49,7 +65,7 @@ public class GameManager : MonoBehaviour
                 if (miniGameScript != null)
                 {
                     // Check if the public string is not in the dictionary and add it
-                    if (!miniGameStatus.ContainsKey(miniGameScript.miniGameName))
+                    if (miniGameStatus.ContainsKey(miniGameScript.miniGameName) == false)
                     {
                         miniGameStatus.Add(miniGameScript.miniGameName, false);
                     }
@@ -58,12 +74,28 @@ public class GameManager : MonoBehaviour
                     miniGameScript.completed = miniGameStatus[miniGameScript.miniGameName];
                 }
             }
+
+            foreach (GameObject furniture in furniture)
+            {
+                FurniturePlacement furniturePlacementScript = furniture.GetComponentInChildren<FurniturePlacement>();
+                if(furniturePlacementScript != null)
+                {
+                    if (furnitureStatus.ContainsKey(furniturePlacementScript.furniture.name) == false)
+                    {
+                        furnitureStatus.Add(furniturePlacementScript.furniture.name, false);
+                    }
+
+                    if (furnitureStatus[furniturePlacementScript.furniture.name] == true)
+                    {
+                        furniturePlacementScript.Place();
+                    }
+                }
+            }
         }
     }
 
     void Awake()
     {
-        // Ensure there is only one instance of UIManager
         if (instance == null)
         {
             instance = this;
@@ -75,5 +107,6 @@ public class GameManager : MonoBehaviour
         }
 
         miniGameStatus = new Dictionary<string, bool>();
+        furnitureStatus = new Dictionary<string, bool>();
     }
 }
