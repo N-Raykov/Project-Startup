@@ -12,6 +12,7 @@ public class ButtonClick : MonoBehaviour
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         UIManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<UIManager>();
+        
     }
 
     public void MoveScene(int sceneID)
@@ -33,4 +34,6 @@ public class ButtonClick : MonoBehaviour
     {
         UIManager.TogglePauseMenu();
     }
+
+   
 }
