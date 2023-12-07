@@ -6,6 +6,26 @@ public class FurniturePlacement : OverworldInteractable
 {
     public GameObject furniture;
     [SerializeField] int cost;
+    [SerializeField] GameObject costTextGameObject;
+    private TextMesh costText;
+
+    private void Start()
+    {
+        costText = costTextGameObject.GetComponent<TextMesh>();
+        costText.text = cost.ToString();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+
+        ShowCost();
+    }
+
+    private void ShowCost()
+    {
+        costTextGameObject.SetActive(isSelected);
+    }
 
     public override void Interact()
     {
