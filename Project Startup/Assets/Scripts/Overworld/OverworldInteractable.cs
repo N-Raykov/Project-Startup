@@ -6,7 +6,7 @@ public class OverworldInteractable : Interactable
 {
     protected GameManager gameManager;
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
 
     [SerializeField] float interactDistance = 1f;
 
@@ -19,6 +19,7 @@ public class OverworldInteractable : Interactable
     protected override void Awake()
     {
         base.Awake();
+        player = GameObject.FindGameObjectWithTag("Player");
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
     }
 

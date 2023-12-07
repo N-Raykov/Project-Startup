@@ -590,6 +590,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: character4@Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 990a56a82f38eec4cbbc61e75e376ba9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 990a56a82f38eec4cbbc61e75e376ba9, type: 3}
 --- !u!1 &410087039
@@ -938,7 +943,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 658574704}
-  player: {fileID: 1869198070}
+  player: {fileID: 1433471837}
   interactDistance: 2
   outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
   inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
@@ -1728,7 +1733,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   renderers:
   - {fileID: 1710173764}
-  player: {fileID: 1869198070}
+  player: {fileID: 1433471837}
   interactDistance: 2
   outOfRangeInteractColor: {r: 1, g: 1, b: 1, a: 1}
   inRangeInteractableColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
