@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class BreakerManager : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI completed;
+
     [SerializeField] GameObject normalBreakerPrefab;
     [SerializeField] GameObject brokenBreakerPrefab;
     [SerializeField] GameObject movingBreakerPrefab;
@@ -53,6 +56,7 @@ public class BreakerManager : MonoBehaviour
 
     public void HandleMovingBreakerPlaced(Vector3 position)
     {
+        completed.enabled = true;
         Instantiate(normalBreakerPrefab, position, Quaternion.identity);
         gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();

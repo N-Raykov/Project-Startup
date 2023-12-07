@@ -220,18 +220,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 152024968}
-        m_TargetAssemblyTypeName: ButtonClick, Assembly-CSharp
-        m_MethodName: ChangeGameState
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &152024966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -979,6 +967,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2662035021959821697, guid: a45816d7d3c938d48abbcfa4ac7555b7,
         type: 3}
+    - target: {fileID: 6425995126422381636, guid: 404e5a785475bcc48b10b5f3448c87a5,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bf8ccdbf353cefe4da5eea33d3d1edae, type: 3}
     - target: {fileID: 6721718382700100924, guid: 404e5a785475bcc48b10b5f3448c87a5,
         type: 3}
       propertyPath: m_RootOrder

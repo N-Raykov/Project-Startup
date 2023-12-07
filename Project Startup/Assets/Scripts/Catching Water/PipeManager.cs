@@ -141,7 +141,7 @@ public class PipeManager : MonoBehaviour
     public void EndMinigame()
     {
         completionParticles.Play();
-        completed.enabled = false;
+        completed.enabled = true;
         gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();
     }
