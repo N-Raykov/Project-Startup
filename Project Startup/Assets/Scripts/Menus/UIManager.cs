@@ -77,4 +77,6 @@ public class UIManager : MonoBehaviour
             Time.timeScale = isPaused ? 0f : 1f; // Freeze time when paused
         }
     }
+
+ 
 }
