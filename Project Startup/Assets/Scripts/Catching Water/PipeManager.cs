@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class PipeManager : MonoBehaviour
 {
+    [SerializeField] ParticleSystem completionParticles;
+    [SerializeField] TextMeshProUGUI completed;
+
     [SerializeField] GameObject nutPrefab;
     [SerializeField] GameObject waterDropletPrefab;
     [SerializeField] float minSpawnInterval = 2f;
@@ -136,6 +140,8 @@ public class PipeManager : MonoBehaviour
 
     public void EndMinigame()
     {
+        completionParticles.Play();
+        completed.enabled = false;
         gameManager.money += Random.Range(minMoneyOnWin, maxMoneyOnWin);
         gameManager.CompleteCurrentMinigame();
     }
