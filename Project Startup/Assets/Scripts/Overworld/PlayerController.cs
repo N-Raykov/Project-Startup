@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float _speed = 1f;
     [SerializeField] Rigidbody _rb;
+    [SerializeField] float rotationSpeed = 0.15f;
+
 
     GameObject[] interactables;
     List<GameObject> interactablesInRange;
@@ -18,7 +20,12 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")) * _speed;
-        direction.y = _rb.velocity.y;
+
+        if (direction != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed);
+        }
+
         _rb.velocity = direction;
     }
 
